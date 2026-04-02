@@ -35,12 +35,13 @@ The executable is produced at `apps/svf_sim/svf_sim`.
 
 ```bash
 cd apps/svf_sim
-gcc -o svf_sim src/svf_sim.c \
+gcc -o svf_sim src/main.c src/svf_sim_host.c src/vcd_writer.c \
     ../../external/libxsvf/svf.c \
     ../../external/libxsvf/tap.c \
     ../../external/libxsvf/play.c \
     ../../external/libxsvf/statename.c \
     ../../external/libxsvf/memname.c \
+    -Iinclude -I../../external/libxsvf \
     -DLIBXSVF_WITHOUT_XSVF -DLIBXSVF_WITHOUT_SCAN -Wall -O2
 ```
 
@@ -87,8 +88,13 @@ jtag_programmer_c/
 │   └── svf_sim/
 │       ├── CMakeLists.txt      # svf_sim build target
 │       ├── Makefile            # Standalone build
+│       ├── include/
+│       │   ├── svf_sim_host.h  # Simulation host API (struct sim_ctx, init)
+│       │   └── vcd_writer.h    # VCD file output API
 │       └── src/
-│           └── svf_sim.c       # Application source
+│           ├── main.c          # CLI entry point (arg parsing, file I/O)
+│           ├── svf_sim_host.c  # libxsvf host callbacks (JTAG simulation)
+│           └── vcd_writer.c    # VCD writer implementation
 └── external/
     └── libxsvf/                # SVF/XSVF parsing library
         ├── CMakeLists.txt
