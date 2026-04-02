@@ -1,0 +1,3 @@
+[submodule "external/libxsvf"]
+	path = external/libxsvf
+	url = https://github.com/isuruathapattu/libxsvf.git

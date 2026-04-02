@@ -1,0 +1,13 @@
+build/
+*/build/
+*.o
+*.a
+*.so
+*.out
+*.elf
+*.bin
+*.hex
+*.log
+*.swp
+.DS_Store
+*.vcd
